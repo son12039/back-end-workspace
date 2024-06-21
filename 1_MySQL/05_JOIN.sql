@@ -209,7 +209,7 @@ from employee
 	join department on (dept_code = dept_id)
     join location on (location_id = local_code)
     join JOB using (job_code)
-where local_name like '%ASIA%' AND job_code = 'j6';
+where local_name like '%ASIA%' AND job_name = '대리';
 
 -- 2. 70년대생 이면서 여자이고, 성이 전씨인 직원들의 직원명 주민번호 부서명 직급명 조회
 select emp_name, emp_no,dept_title,job_name
@@ -217,18 +217,19 @@ from employee
 	join department on (dept_code = dept_id)
     join location on (location_id = local_code)
     join JOB using (job_code)
-    where substr(emp_no,8,1) = 2 and emp_name like '전%';
-    
+    where emp_no like '7_____-2%'
+    and emp_name like '전%';
+    -- 
 -- 3. 보너스를 받은 직원들의 직원명 보너스 연봉 부서명 근무지역조회
-select emp_name,bonus,salary*12*(bonus + 1) 보너스포함연봉,dept_title,local_name
+--    부서가 없는 직원들도 나타내고 싶다면 LEFT JOIN (employee 테이블이 왼쪾에 있을 때)
+select emp_name,bonus,(salary*12*(bonus + 1)) 보너스포함연봉,dept_title,local_name
 from employee
-	join department on (dept_code = dept_id)
-    join location on (location_id = local_code)
-    join JOB using (job_code)
+	left join department on (dept_code = dept_id)
+    left join location on (location_id = local_code)
     where bonus is not null;
     
 -- 4. 한국과 일본에서 근무하는 직원들의 직원명 부서명 근무지역 근무 국가 조회
-select emp_name,dept_title,local_name,national_code
+select emp_name,dept_title,local_name,national_name
 from employee
 	join department on (dept_code = dept_id)
     join location on (location_id = local_code)
@@ -253,7 +254,9 @@ from employee
 -- 급여 등급이 s1 s2인경우 고급
 -- s3 s4인경우 중급
 -- s5 s6인 경우 초급
-SELECT emp_id,emp_name,job_name,sal_level,IF(sal_level IN ('S1','S2'),'고급',if(sal_level IN ('S3','S4'),'중급','초급'))
+SELECT emp_id,emp_name,job_name,sal_level,
+IF(sal_level IN ('S1','S2'),'고급',
+if(sal_level IN ('S3','S4'),'중급','초급'))
 FROM employee
 	join sal_grade on (salary between min_sal and max_sal)
     JOIN JOB USING (JOB_CODE);
