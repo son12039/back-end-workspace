@@ -24,8 +24,7 @@ CREATE TABLE publisher(
 
     SELECT *
     FROM publisher;
-
-DESC publisher;
+	DESC publisher;
 
 
 
@@ -58,8 +57,7 @@ CREATE TABLE book(
 	VALUES(5, '그로스 해킹', '라이언 홀리데이', 13800, 3);
     
 SELECT *
-FROM book
-join publisher on (bk_no = pub_no);
+FROM book;
 DESC book;
 
 
@@ -87,8 +85,6 @@ CREATE TABLE member(
     CONSTRAINT mem2 CHECK (status IN ('N', 'Y'))
     );
 
-SELECT *
-FROM member;
 
 INSERT INTO member(member_no, member_id, member_pwd,member_name,gender,address,phone,status,enroll_date)
 	VALUES(1, 'user1', 'pass1', '가나다', 'M', '서울시 강남구', '010-1111-2222', 'N', NOW());
@@ -97,6 +93,8 @@ INSERT INTO member(member_no, member_id, member_pwd,member_name,gender,address,p
     INSERT INTO member(member_no, member_id, member_pwd,member_name,gender,address,phone,status,enroll_date)
 	VALUES(3, 'user3', 'pass3', '사아자', 'F', '경기도 광주시', '010-4444-5555', 'N', NOW());
 
+SELECT *
+FROM member;
 
 -- 4. 도서를 대여한 회원에 대한 데이터를 담기 위한 대여 목록 테이블(rent)
 --    컬럼 : rent_no(대여번호) -- 기본 키
@@ -110,13 +108,15 @@ CREATE TABLE rent(
 	rent_no INT PRIMARY KEY,
     rent_mem_no int,
     rent_book_no int,
-    rent_date DATE DEFAULT (NOW()),
-    FOREIGN KEY (rent_mem_no) REFERENCES member(member_no) ON DELETE SET NULL,
-    FOREIGN KEY (rent_book_no) REFERENCES BOOK(bk_no) ON DELETE SET NULL
+    rent_date DATE DEFAULT (NOW())
 );
+ALTER TABLE rent ADD FOREIGN KEY(rent_mem_no) REFERENCES member(member_no) ON DELETE SET NULL;
+ALTER TABLE rent ADD FOREIGN KEY(rent_book_no) REFERENCES BOOK(bk_no) ON DELETE SET NULL;
+
 
 SELECT *
 FROM rent;
+DESC rent;
 
 	INSERT INTO rent(rent_no, rent_mem_no, rent_book_no,rent_date)
 	VALUES(1, '1', '2',NOW());
@@ -132,17 +132,16 @@ FROM rent;
 
 -- 5. 2번 도서를 대여한 회원의 이름, 아이디, 대여일, 반납 예정일(대여일 + 7일)을 조회하시오.
 
-select member_name 도서명,member_id 출판사명,rent_date 대여일,date_format(rent_date, '%Y-%m-%d') 반납예정일
+select member_name 회원이름,member_id 아이디,rent_date 대여일,adddate(rent_date, interval 7 DAY) '반납 예정일'
 from member
-join rent on (member_no = rent_no);
+join rent on (member_no = rent_mem_no)
+join book on (bk_no = rent_no)
+where rent_book_no = 2;
 
-select rent_mem_no
-from rent
-group by rent_mem_no;
 -- 6. 회원번호가 1번인 회원이 대여한 도서들의 도서명, 출판사명, 대여일, 반납예정일을 조회하시오.
-select  bk_title 도서명 ,pub_name 출판사면 ,rent_date 대여일 ,date_format(rent_date, '%Y-%m-%d') 반납예정일
+select  bk_title 도서명 ,pub_name 출판사명 , rent_date 대여일 ,adddate(rent_date, interval 7 DAY) '반납 예정일'
 from member
-left join book on (member_id = bk_no)
-left join rent on (member_id = rent_no) 
-left join publisher on (member_id = pub_no)
-;
+join rent on (member_no = rent_mem_no)
+join book on (bk_no = rent_book_no)
+join publisher on (pub_no = bk_pub_no)
+where member_no = 1;

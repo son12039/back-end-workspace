@@ -43,6 +43,7 @@ ROLLBACK;
 
 COMMIT;
 
+
 -- emp_salary 테이블에서 노옹철 사원의 급여를 3000000원으로 변경
 
 -- emp_salary에서 emp_id가 213, 218인 사원 삭제
@@ -53,6 +54,13 @@ WHERE emp_name = '노옹철';
 
 DELETE FROM emp_salary WHERE emp_id IN (213, 218);
 
+-- emp_id가 200인 사원 삭제
+DELETE FROM emp_salary 
+WHERE emp_id = 200;
+-- DDL 구문을 실행하는 순간 임시 저장된 변경사항들을 무조건 반영!
+CREATE TABLE test(
+	tid int
+);
 SELECT * FROM emp_salary;
 
 

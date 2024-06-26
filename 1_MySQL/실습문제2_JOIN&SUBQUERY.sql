@@ -23,6 +23,7 @@ join address using (address_id)
 join city using (city_id)
 join country using (country_id)
 where first_name = 'TRACY';
+
 -- 2. 배우 JULIA MCQUEEN이 찍은 영화 제목 조회 (title 기준 정렬 10개까지)
 select  first_name, last_name,title 
 from film
@@ -32,10 +33,6 @@ where first_name = 'JULIA' and last_name = 'MCQUEEN'
 order by title
 limit 10;
 
-
-
-
-
 -- 3. 영화 NOON PAPI에 나오는 배우들의 이름 조회
 SELECT first_name,last_name
 FROM film
@@ -44,23 +41,22 @@ join actor using (actor_id)
 where title ='NOON PAPI';
 
 -- 4. 각 카테고리별 이메일이 JOYCE.EDWARDS@sakilacustomer.org인 고객이 빌린 DVD 대여 수 조회
-SELECT name,count(*) -- category_id 별 JOYCE.EDWARDS@sakilacustomer.org 인 빌린 수
+SELECT name category,count(*)
 FROM category
 join film_category using(category_id)
 join film using (film_id)
-join inventory using (film_id)
-join customer using (store_id)
+join inventory using(film_id)
+join rental using (inventory_id)
+join customer using (customer_id)
 where email = 'JOYCE.EDWARDS@sakilacustomer.org'
 group by category_id;
 
 -- 5. 이메일이 JOYCE.EDWARDS@sakilacustomer.org인 고객이 가장 최근에 빌린 영화 제목과 영화 내용을 조회 
-SELECT MAX(rental_date),title,description
-from category
-join film_category using(category_id)
-join film using (film_id)
-join inventory using (film_id)
-join customer using (store_id)
+SELECT title,description
+from customer
 join rental using (customer_id)
+join inventory using (inventory_id)
+join film using (film_id)
 where email = 'JOYCE.EDWARDS@sakilacustomer.org'
-group by title,description;
--- crossr 193
+order by rental_date desc
+limit 1;
