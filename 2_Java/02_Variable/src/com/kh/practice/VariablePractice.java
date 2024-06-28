@@ -7,7 +7,7 @@ public class VariablePractice {
 	public static void main(String[] args) {
 		VariablePractice m1 = new VariablePractice();
 		
-		m1.method6();
+		m1.method5();
 	}
 	
 	/*
@@ -18,8 +18,11 @@ public class VariablePractice {
 	 * 성인 2명과 청소년 3명이 영화를 보려고 할 때 지불해야 할 금액을 계산 후 출력하세요.
 	 * */
 	public void method1() {
-		
-		System.out.println(10000*2 + 7000*3 +"원");
+		int a = 10000;
+		int b = 7000;
+		int c = 2;
+		int d = 3;
+		System.out.println(a * c + b * d +"원");
 		System.out.println("-----");
 	}
 	
@@ -62,14 +65,18 @@ public class VariablePractice {
 	 * 나누기 몫 : 3
 	 * */
 	public void method3() {
-		
-		int a = 23;
-		int b = 7;
-		
-		System.out.println(a + b);
-		System.out.println(a - b);
-		System.out.println(a * b);
-		System.out.println(a / b);
+			
+		Scanner sc = new Scanner(System.in);
+		System.out.print("첫 번째 정수 : ");
+		// int a = Integer.parseInt(sc.nextLine());
+		int aa = sc.nextInt();
+		System.out.print("두 번째 정수 : ");
+		// int b = Integer.parseInt(sc.nextLine());
+		int bb = sc.nextInt();
+		System.out.println(aa + bb);
+		System.out.println(aa - bb);
+		System.out.println(aa * bb);
+		System.out.println(aa / bb);
 		
 		System.out.println("-----");
 	}
@@ -114,10 +121,10 @@ public class VariablePractice {
 		String apl = sc.nextLine();
 		char a0 = apl.charAt(0);
 		char a1 = apl.charAt(1);
-		char a4 = apl.charAt(4);
+		char a4 = apl.charAt(apl.length()-1);
 		System.out.println("첫번째 문자 :" + a0);
-		System.out.println("첫번째 문자 :" + a1);
-		System.out.println("첫번째 문자 :" + a4);
+		System.out.println("두번째 문자 :" + a1);
+		System.out.println("마지막 문자 :" + a4);
 		
 	}
 
@@ -134,7 +141,7 @@ public class VariablePractice {
 		char a =  sc.nextLine().charAt(0);
 		int aa = a;
 		System.out.println("A unicode :" + aa);
-	 System.out.println("B unicode :" + (aa+1));
+		System.out.println("B unicode :" + (aa+1));
 	}
 	
 	/*
