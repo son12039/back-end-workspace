@@ -65,8 +65,9 @@ public class OperatorPractice {
 	public void method5() {
 		System.out.print("주민번호입력 : ");
 		String num = sc.nextLine();
-		char gen = num.charAt(8);
-		String result = (gen == 1 || gen == 3) ? "남자" : "여자" ;
+		char gen = num.charAt(7);
+		System.out.println(gen);
+		String result = (gen == '1' || gen == '3') ? "남자" : "여자" ;
 		System.out.println(result);
 	}
 
@@ -86,6 +87,7 @@ public class OperatorPractice {
 		int num1 = Integer.parseInt(sc.nextLine());
 		System.out.print("바구니 수용 크기 : ");
 		int num2 = Integer.parseInt(sc.nextLine());
+		
 		int result =  (num1%num2 !=0) ? num1/num2 + 1 : num1/num2;
 		
 		System.out.println(result);
