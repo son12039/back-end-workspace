@@ -92,7 +92,7 @@ SELECT replace('서울특별시 강남구 역삼동', '강남구', '서초구');
 /*
 	CONCAT : 문자열을 하나로 합친 후 결과 반환
 */
-SELECT concat('가나다라', 'ABCD','1234'); -- 가나다라ABCD1234
+SELECT concat('가나다라','ABCD','1234'); -- 가나다라ABCD1234
 
 -- 실습문제 ---
 -- 1. 이메일의 kh.or.kr을 gmail.com으로 변경해서 이름, 변경 전 이메일, 변경 후 이메일 조회

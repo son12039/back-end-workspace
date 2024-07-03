@@ -61,6 +61,8 @@ FROM employee
 WHERE BONUS iS NOT NULL
 GROUP BY dept_code;
 
+
+
 /*
 	rollup|cube(컬럼1,컬럼2) (cube는 mySQL X) - 보기힘든 집계 함수// 시험용 시험용 시험용
     - 그릅별 산출한 결과 값의 중간 집계를 계산 해주는 함수
