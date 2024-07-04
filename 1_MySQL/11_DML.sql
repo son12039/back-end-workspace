@@ -161,7 +161,7 @@ where emp_id in (select emp_id from kh.employee
     
 -- emp_salary에서dept_code가 D5인 직원 삭제
  
-where dept_code= 'D5';
+
 
 /*
 	TRUNCATE

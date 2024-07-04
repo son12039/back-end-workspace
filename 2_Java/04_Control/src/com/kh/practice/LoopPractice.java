@@ -1,5 +1,6 @@
 package com.kh.practice;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 class LoopPractice {
@@ -11,7 +12,7 @@ class LoopPractice {
 //		l.method3();
 //		l.method4();
 //		l.method5();
-		l.method2();
+		l.method7();
 	}
  
     /*
@@ -61,12 +62,16 @@ class LoopPractice {
     	System.out.print("문자열입력 : ");
     	String str = sc.nextLine();
     	System.out.print("검색할 문자 입력 : ");
-    	char strcheck = sc.nextLine().charAt(0);
-    	for (int i=0; i<str.length();i++ ) {
-    		if (str.charAt(i)==strcheck) {
+    	char ch = sc.nextLine().charAt(0);
+    /*	for (int i=0; i<str.length();i++ ) {
+    		if (str.charAt(i)==ch) {
     			count +=1;
     		}
-    	} System.out.println(str + " 안에 포함된 "+ strcheck + " 개수 :" + count);
+    	} */
+    		for(char s : str.toCharArray()) {
+    			if (ch == s) count++;
+    		}
+    	 System.out.println(str + " 안에 포함된 "+ ch + " 개수 :" + count);
     }
 
     /*
@@ -83,7 +88,7 @@ class LoopPractice {
     	int num = 1;
     	System.out.println(num);
     	while (num != 0) {
-    		num = (int)(Math.random()*10);
+    		num = (int)(Math.random()*11);
     		System.out.println(num);
     	}; 
     }
@@ -100,34 +105,15 @@ class LoopPractice {
 
      */
     public void method5() {
-    	int dice = 0;
-    	int a1 = 0;
-    	int a2 = 0;
-    	int a3 = 0;
-    	int a4 = 0;
-    	int a5 = 0;
-    	int a6 = 0;
+    	int[] dice = new int[6];
     	for (int i = 0; i<10; i++) {
-    		dice = (int)(Math.random()*6+1);
-    		if (dice == 1) {
-    			a1 += 1;
-    		} else if (dice == 2){
-    			a2 += 1;
-    		} else if (dice == 3){
-    			a3 += 1;
-    		} else if (dice == 4){
-    			a4 += 1;
-    		} else if (dice == 5){
-    			a5 += 1;
-    		} else if (dice == 6){
-    			a6 += 1;
-    		} 
-    	} System.out.println(1 + " : " + a1);
-    	System.out.println(2 + " : " + a2);
-    	System.out.println(3 + " : " + a3);
-    	System.out.println(4 + " : " + a4);
-    	System.out.println(5 + " : " + a5);
-    	System.out.println(6 + " : " + a6);
+    		int dicenum = (int)(Math.random()*6);
+    		dice[dicenum]++;
+    	}
+    	System.out.println(Arrays.toString(dice));
+    	for (int i = 0; i<6; i++) {
+    		System.out.println((i+1)+" : "+(dice)[i]);
+    	}
     }
 
     /*
@@ -152,6 +138,46 @@ class LoopPractice {
         이겼습니다 !
 	    비긴 횟수 : 1, 진 횟수 : 1, 이긴 횟수 : 1
     */
+    public void method7() {
+    	
+    	String[] rps = {"가위", "바위", "보"};
+    	int win = 0;
+    	int lose = 0;
+    	int draw = 0;
+    	System.out.print("이름 입력 : ");
+    	String name = sc.nextLine();
+    	
+    	while (true ) {
+    		System.out.print("가위바위보 : ");
+    		String input = sc.nextLine();
+    		
+    		// 0 가위, 1 바위, 2보
+    		int computer = (int)(Math.random() * 3);
+    		System.out.println("컴퓨터 : " + rps[computer]);
+    		
+    		System.out.println(name + " : " + input);
+    		
+    		// 배열에서 값으로 인덱스 찾기 -> 사용자가 입력한 값과 배열안에서 일치하는 값을 찾아 인덱스값을 출력
+    		int number = Arrays.asList(rps).indexOf(input);	
+    		if(computer==number) {
+    			System.out.println("비겼습니다");
+    			draw++;
+    		} else if((number == 0 && computer == 2) 
+    				|| (number == 1 && computer == 0)
+    				|| (number == 2 && computer == 1)) {
+    			System.out.println("이겼습니다");
+    			win++;
+    			break;
+    			 
+    		} else {
+    			System.out.println("졌습니다");
+    			lose++;
+    		}	
+    	}System.out.printf(" 비긴 횟수 : %d, 진 횟수 : %d, 이긴 횟수 : %d",draw,lose,win);
+   }
+    
+    
+    //폐급코드
     public void method6() {
     	int a = 0;
     	int b = 0;
