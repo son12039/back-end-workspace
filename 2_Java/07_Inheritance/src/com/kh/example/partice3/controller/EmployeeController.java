@@ -1,34 +1,30 @@
 package com.kh.example.partice3.controller;
 
-import com.kh.practice3.model.Employee;
+import com.kh.example.practice3.model.Employee;
 
-public class EmployeeController extends Employee{
-	Employee employee = new Employee();
+public class EmployeeController{
+	private Employee employee;
+	
 	public void add(int empNo, String name, char gender, String phone, String dept, int salary, double bonus) {
-		empNo = getEmpNo();
-		name = getName();
-		gender = getGender();
-		phone = getPhone();
-		dept = getDept();
-		salary = getSalary();
-		bonus = getBonus();
+		this.employee = new Employee(empNo,name,gender,phone,dept,salary,bonus);
 	}
+	
 	
 	public void add (int empNo, String name, char gender, String phone) {
-		empNo = getEmpNo();
-		name = getName();
-		gender = getGender();
-		phone = getPhone();
+		this.employee = new Employee (empNo, name, gender, phone, null, 0, 0.0);
 	}
 	public void modify(String phone) {
-		phone = getPhone();
+		employee.setPhone(phone);	
 	}
 	public void modify(int salary) {
-		salary = getSalary();
+		employee.setSalary(salary);
 	}
 	public void modify(double bonus) {
-		bonus = getBonus();
+		employee.setBonus(bonus);
 	}
 	
 	
+	public Employee info() {
+		return employee;
+	}
 }

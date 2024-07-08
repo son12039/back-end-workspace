@@ -1,6 +1,7 @@
-package com.kh.practice3.model;
+package com.kh.example.practice3.model;
 
-public class Employee {
+public class Employeeteacher {
+
 	private int empNo;
 	private String name;
 	private char gender;
@@ -9,9 +10,9 @@ public class Employee {
 	private int salary;
 	private double bonus;
 	
-	public Employee() {}
+	public Employeeteacher() {}
 
-	public Employee(int empNo, String name, char gender, String phone, String dept, int salary, double bonus) {
+	public Employeeteacher(int empNo, String name, char gender, String phone, String dept, int salary, double bonus) {
 		this.empNo = empNo;
 		this.name = name;
 		this.gender = gender;
@@ -20,13 +21,11 @@ public class Employee {
 		this.salary = salary;
 		this.bonus = bonus;
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
-		return "Employee [empNo=" + empNo + ", name=" + name + ", gender=" + gender + 
-				", phone=" + phone + ", dept="+ dept + ", salary=" + salary + ", bonus=" + bonus + "]";
+		return "Employeeteacher [empNo=" + empNo + ", name=" + name + ", gender=" + gender + ", phone=" + phone
+				+ ", dept=" + dept + ", salary=" + salary + ", bonus=" + bonus + "]";
 	}
 
 	public int getEmpNo() {
@@ -84,7 +83,6 @@ public class Employee {
 	public void setBonus(double bonus) {
 		this.bonus = bonus;
 	}
-	
 	
 	
 }
