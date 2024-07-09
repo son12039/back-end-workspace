@@ -11,7 +11,6 @@ public class Controller {
 	}
 	
 	public void menu() {
-		cs.getName();
-		cs.getAge();
+
 	}
 }
