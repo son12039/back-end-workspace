@@ -10,14 +10,14 @@ public class Application {
 		ArrayList<Integer> arr2 = new ArrayList(); // 내가 뽑은 번호
 		int count = 0;
 		for (int i = 0; i < 6; i++) {
-			arr.add((int) (Math.random() * 44 + 1));
+			arr.add((int) (Math.random() * 45 + 1));
 		}
 		Collections.sort(arr);
 		while (!arr.equals(arr2)) {
 			count++;
 			arr2.clear();
 			for (int i = 0; i < 6; i++) {
-				arr2.add((int) (Math.random() * 44 + 1));
+				arr2.add((int) (Math.random() * 45 + 1));
 			}
 			Collections.sort(arr2);
 			System.out.println("로또 번호 : " + arr);
