@@ -1,6 +1,6 @@
 package com.kh.practice999.model;
 
-public class Music {
+public class Music implements Comparable<Music> {
 	private String title;
 	private String singer;
 	public Music() {
@@ -24,6 +24,10 @@ public class Music {
 	}
 	public void setSinger(String singer) {
 		this.singer = singer;
+	}
+	@Override
+	public int compareTo(Music o) {
+		return 0;
 	}
 	
 }

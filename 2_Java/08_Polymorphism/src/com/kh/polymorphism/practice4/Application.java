@@ -15,10 +15,8 @@ public class Application {
 
     public static void main(String[] args) {
         Application app = new Application();
-        
-        // 도서 초기화 메서드 호출
-        app.bookmenu();
-        
+   
+        app.bookmenu();     
         app.firstmenu();
         app.menu();
     }
