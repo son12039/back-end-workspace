@@ -1,4 +1,4 @@
-package com.kh.practice.model;
+package com.kh.array.practice.model;
 
 public class Book {
 	

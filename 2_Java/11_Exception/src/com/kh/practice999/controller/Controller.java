@@ -8,9 +8,7 @@ import com.kh.practice999.model.Music;
 public class Controller {
     ArrayList<Music> musiclist = new ArrayList<>();
     Music music = new Music();
-    
-    
-    
+      
     public void lastadd(String title, String singer) {
         Music addMusic = new Music(title, singer);
         musiclist.add(musiclist.size(),addMusic);
