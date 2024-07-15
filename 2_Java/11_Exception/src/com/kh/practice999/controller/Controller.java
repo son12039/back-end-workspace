@@ -45,17 +45,17 @@ public class Controller {
     }
     
     public Music rewrite(String rewritett,String title,String singer) {
-    	 Music beforeMusic = null;
-    	for(Music rewritetitle : musiclist) {
-    		if(rewritetitle.getTitle().equals(rewritett)) {
-    			beforeMusic = new Music(rewritetitle.getTitle(),rewritetitle.getSinger());
-    			rewritetitle.setSinger(singer);
-    			rewritetitle.setTitle(title);
+    	 Music be = null;
+    	for(Music re : musiclist) {
+    		if(re.getTitle().equals(rewritett)) {
+    			be = new Music(re.getTitle(),re.getSinger());
+    			re.setSinger(singer);
+    			re.setTitle(title);
     			break;
     		}
 
     	}
-		return beforeMusic;    	
+		return be;    	
     }
     
     public void singerdownset() {
