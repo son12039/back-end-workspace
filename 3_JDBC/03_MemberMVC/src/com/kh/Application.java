@@ -9,7 +9,7 @@ import com.kh.model.Member;
 public class Application {
 	
 	private Scanner sc = new Scanner(System.in);
-	private MemberController mc = new MemberController();
+	private MemberController mc = new MemberController().getInstance();
 
 	public static void main(String[] args) {
 		Application app = new Application();

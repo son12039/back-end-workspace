@@ -5,14 +5,17 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
-		ArrayList<Integer> arr = new ArrayList<>();
-		int i = 2;
-		while(N>1) {	 
-			while(N%i!=0) {
-				N /= i;
-				System.out.println(N);				
+		int M = sc.nextInt();
+		int sum = 0;
+		int[] c= new int[3];
+		for(int i =0; i<N; i++) {
+			if(i<=2)c[i]=sc.nextInt();
+			else {
+			int a = (sc.nextInt());
+			int min = Math.max(Math.min(c[0], c[1]), c[2]);
 			}
-			i++;
 		}
+		
+		System.out.println(sum);
 	}
 }
