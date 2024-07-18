@@ -176,7 +176,9 @@ public class Application {
 
 	// 2. 내가 대여한 책 조회
 	public void printRentBook() throws SQLException {
-		con.printRentBook(member.getMember_no());
+		for(Rent b : con.printRentBook()) {
+			System.out.println(b);
+		}
 		// 내가 대여한 책들을 반복문을 이용하여 조회
 		// 대여 번호, 책 제목, 책 저자, 대여 날짜, 반납 기한(+14일) 조회
 	}
