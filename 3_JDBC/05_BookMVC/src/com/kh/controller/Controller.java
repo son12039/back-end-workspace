@@ -1,16 +1,10 @@
 package com.kh.controller;
 
-import java.io.FileInputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import com.kh.model.Book;
+import com.kh.model.Member;
 import com.kh.model.Rent;
 
 import config.ServerInfo;
@@ -120,11 +114,11 @@ public class Controller {
 
 	}
 	
-	public String login(String id,String password) throws SQLException {
+	public Member login(String id,String password) throws SQLException {
 		
 		Connection conn = getConnect();
 		
-		String query = "SELECT member_id,member_pwd,member_name FROM member WHERE member_id=? AND member_pwd=?";
+		String query = "SELECT * FROM member WHERE member_id=? AND member_pwd=?";
 		PreparedStatement ps = conn.prepareStatement(query);		
 		ps.setString(1, id);
 		ps.setString(2, password);
@@ -133,46 +127,86 @@ public class Controller {
 			String Id = rs.getString("member_id");
 			String Password = rs.getString("member_pwd");
 			if(Id.equals(id)&&Password.equals(password)) {
-				String a = rs.getString("member_name");
-				closeAll(rs, ps, conn);
-				return a;
+			Member mb = new Member(rs.getInt("member_no"),Id,Password, rs.getString("member_name"));
+			closeAll(rs, ps, conn);
+			return mb;
 			}
 		}
 		closeAll(rs, ps, conn);
-		return null;
-		
-		
+		return null;		
 	}
 	
 	public boolean deleteMember(String id,String password) throws SQLException {
 		
 		Connection conn = getConnect();
 		String query = 
-				"DELETE FROM member  WHERE member_id=?AND member_pwd=?";
+				"DELETE FROM member WHERE member_id=?AND member_pwd=?";
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setString(1, id);
 		ps.setString(2, password);
+		boolean a = ps.executeUpdate()==1;
 		closeAll(ps, conn);
-		return ps.executeUpdate()==1;		
+		return a;		
 		
 	}
 //	select * from rent join member on (member_no=rent_mem_no)
 
-	public ArrayList<Rent> printRentBook() throws SQLException {
+	public ArrayList<Rent> printRentBook(int member_no) throws SQLException {
 		Connection conn = getConnect();
-		ArrayList<Rent> rent = new ArrayList<>();
-		PreparedStatement ps = conn.prepareStatement("SELECT * FROM rent");
+		ArrayList<Rent> rentlist = new ArrayList<>();
+		PreparedStatement ps = conn.prepareStatement
+		("SELECT * FROM rent join member on (member_no=rent_mem_no) join book on (bk_no=rent_book_no) WHERE rent_mem_no=?");
+		ps.setInt(1, member_no);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
-			Book book = new Book(rs.getInt("bk_no"),rs.getString("bk_title"),
-					rs.getString("bk_author"), rs.getInt("bk_price"), rs.getInt("bk_pub_no"));
-			rent.add(null);
+		//	대여 번호, 책 제목, 책 저자, 대여 날짜, 반납 기한(+14일
+			int No = rs.getInt("rent_no");
+			String Title = rs.getString("bk_title");
+			String Author = rs.getString("bk_author");
+			Date RD = rs.getDate("rent_date");
+			Rent rent = new Rent(No,Title,Author,RD);
+			rentlist.add(rent);
 		}
 		closeAll(rs, ps, conn);
-		return rent;
+		return rentlist;
+	}
+
+	public boolean rentBook(int rentNo,int no) throws SQLException {
+		Connection conn = getConnect();
+		PreparedStatement ps = conn.prepareStatement
+		("SELECT * FROM rent WHERE rent_book_no=?");
+		ps.setInt(1, rentNo);
+		ResultSet rs = ps.executeQuery();
+		if(!rs.next()) {
+			PreparedStatement rt = conn.prepareStatement
+			("INSERT INTO rent(rent_mem_no, rent_book_no) VALUES(?,?)");
+			rt.setInt(1, no);
+			rt.setInt(2, rentNo);
+			try {
+				rt.executeUpdate();
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		return false;	
 	}
 	
-	
-	
+	public boolean deleteRent(int deleteRentNo,int no) throws SQLException {
+		Connection conn = getConnect();
+		PreparedStatement rt = conn.prepareStatement
+				("DELETE FROM rent WHERE rent_no=? AND rent_mem_no=?");
+		rt.setInt(1, deleteRentNo);
+		rt.setInt(2, no);
+		try {
+			int a = rt.executeUpdate();
+			return a>0;
+		} catch (Exception e) {
+			return false;
+		}
+			
+	}	
 	
 }
+	
+

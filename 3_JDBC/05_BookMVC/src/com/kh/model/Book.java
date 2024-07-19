@@ -11,11 +11,11 @@ public class Book {
 	private String title;
 	private String author;
 	private int price;
-	private int pub_no;
+	private int pubNo;
 	@Override
 	public String toString() {
 		return "책번호:" + no + ", 이름: " + title + ", 저자: " + author + 
-				", 가격: " + price + ", 출판번호: " + pub_no;
+				", 가격: " + price + ", 출판번호: " + pubNo;
 	}
 	
 }

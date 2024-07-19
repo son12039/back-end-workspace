@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.kh.controller.Controller;
 import com.kh.model.Book;
 import com.kh.model.Member;
+import com.kh.model.Rent;
 
 public class Application {
 
@@ -118,10 +119,11 @@ public class Application {
 		String Id = sc.nextLine();
 		System.out.print("로그인비밀번호 입력 : ");
 		String Password = sc.nextLine();
-		String name = con.login(Id, Password);
-		if(name!=null) {
-			System.out.println(name+"님, 환영합니다!");
-			memberMenu();
+		Member mb = con.login(Id, Password);
+
+		if(mb!=null) {
+			System.out.println(mb.getMemberName()+"님, 환영합니다!");
+			memberMenu(mb.getMemberNo());
 		} else {
 			System.out.println("로그인실패");
 		}
@@ -130,7 +132,7 @@ public class Application {
 		// 로그인에 성공하면 "~~님, 환영합니다!" 출력 후 memberMenu() 호출
 	}
 
-	public void memberMenu() throws SQLException {
+	public void memberMenu(int no) throws SQLException {
 		boolean check = true;
 		while (check) {
 			System.out.println("1. 책 대여");
@@ -141,13 +143,13 @@ public class Application {
 			System.out.print("메뉴 번호 입력 : ");
 			switch (Integer.parseInt(sc.nextLine())) {
 			case 1:
-				rentBook();
+				rentBook(no);
 				break;
 			case 2:
-				printRentBook();
+				printRentBook(no);
 				break;
 			case 3:
-				deleteRent();
+				deleteRent(no);
 				break;
 			case 4:
 				check = false;
@@ -161,8 +163,12 @@ public class Application {
 	}
 
 	// 1. 책 대여
-	public void rentBook() throws SQLException {
+	public void rentBook(int no) throws SQLException {
 		printBookAll();
+		System.out.print("대여하실 책번호입력 : ");
+		int rentNo = Integer.parseInt(sc.nextLine());
+		System.out.println(con.rentBook(rentNo,no) ? "성공적으로 책을 대여했습니다." :
+			"이미 대여됐거나 없는 책입니다");
 		// printBookAll 메서드 호출하여 전체 책 조회 출력 후
 		// 대여할 책 번호 선택을 사용자한테 입력 받아
 		// 대여에 성공하면 "성공적으로 책을 대여했습니다." 출력
@@ -170,13 +176,23 @@ public class Application {
 	}
 
 	// 2. 내가 대여한 책 조회
-	public void printRentBook() {
+	public void printRentBook(int no) throws SQLException {
+		for(Rent b : con.printRentBook(no)) {
+			System.out.println(b);
+		}
 		// 내가 대여한 책들을 반복문을 이용하여 조회
 		// 대여 번호, 책 제목, 책 저자, 대여 날짜, 반납 기한(+14일) 조회
 	}
 
 	// 3. 대여 취소
-	public void deleteRent() {
+	public void deleteRent(int no) throws SQLException {
+		for(Rent b : con.printRentBook(no)) {
+			System.out.println(b);
+		}
+		System.out.print("대여취소 책번호입력 : ");
+		int deleteRentNo = Integer.parseInt(sc.nextLine());
+		System.out.println(con.deleteRent(deleteRentNo, no) ? "성공적으로 대여를 취소했습니다." :
+			"대여를 취소하는데 실패했습니다.");
 		// printRentBook 매서드 호출하여 내가 대여한 책 조회 출력 후
 		// 취소할 대여 번호 선택을 사용자한테 입력 받아
 		// 취소에 성공하면 "성공적으로 대여를 취소했습니다." 출력
