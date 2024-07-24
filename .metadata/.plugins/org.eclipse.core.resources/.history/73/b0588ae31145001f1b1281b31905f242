@@ -1,0 +1,24 @@
+package com.kh.model;
+
+import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+public class Rent {
+	
+	
+	public Rent(int rent_no, String bk_title, String bk_author, Date rent_date) {
+		super();
+		this.rent_no = rent_no;
+		this.bk_title = bk_title;
+		this.bk_author = bk_author;
+		this.rent_date = rent_date;
+	}
+	private int rent_no;
+	private String bk_title, bk_author;
+	private Date rent_date;
+	
+}
