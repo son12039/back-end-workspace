@@ -26,8 +26,8 @@
 		<li><a href="/logout">로그아웃</a></li>
 		<!-- 로그아웃 index.jsp -->
 			<% } else { %>
-			<li><a href="/views/register.jsp">회원가입</a></li>
-			<li><a href="/views/login.jsp">로그인</a></li> 		  
+			<li><a href="views/register.jsp">회원가입</a></li>
+			<li><a href="views/login.jsp">로그인</a></li> 		  
 		<% } %>
  							 
 	</ul>

@@ -17,11 +17,9 @@
     </form>
    <h1>태그선택</h1> 
     <form action="tagchoose">
-      <label>아이디 : <input type="text" name="id" /></label> <br />
-      <label>비밀번호 : <input type="password" name="pwd" /></label> <br />
-      <label>이름 : <input type="text" name="name" /></label> <br />
-      <input type="submit" value="회원가입" />
+      <label>태그입력 : <input type="text" name="tag" /></label> <br />
+      <input type="submit" value="태그" />
     </form>
-
+	<a href="/viewtag">태그보기</a>
 </body>
 </html>
