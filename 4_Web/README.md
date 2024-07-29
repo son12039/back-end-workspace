@@ -16,3 +16,40 @@
 
 - 웹 서비스를 위한 자바 클래스를 말하며 자바를 사용해서 웹을 만들기 위한 기술
 - 웹 브라우저로부터 요청을 받아 처리하고 결과를 다시 웹 브라우저로 응답하는 역할
+
+## 동작 구조
+
+1. 클라이언트가 웹 브라우저를 통해 요청을 보낸다.
+2. 해당 요청이 서블릿에 대한 요청이면 컨테이너에게 처리를 넘긴다.
+3. 서블릿에서 요청에 대한 실행이 완료된 후에는 컨테이너가 실행 결과를 웹 서버에 전달한다.
+4. 웹 서버는 서비스를 요청한 클라이언트에 응답한다.
+5. 컨테이너의 서블릿에 대한 설정은 배포 서술자(web.xml)에 작성한다.
+
+## 배포 서술자(Deployment Descriptor)
+
+- 애플리케이션에 대한 전체 설정 정보를 가지고 있는 파일
+- 배포 서술자의 정보를 가지고 컨테이너가 서블릿 구동한다
+- 웹 애플리케이션 폴더의 WEB-INF 폴더에 web.xml 파일이 배포 서술자이다.
+
+## 서블릿 매핑
+
+- 클라이언트의 요청을 서블릿에게 전달하기 위해서는 서블릿을 등록하고 매핑해야 한다. 
+- 서블릿을 등록하고 매핑하는 방법은 web.xml과 @annotation을 이용하는 방법이 있다.
+
+```xml
+<Servlet>
+    <Servlet-name>서블릿 이름</Servlet-name>
+    <Servlet-class>서블릿 클래스</Servlet-class>
+</Servlet>
+<servlet-mapping> 
+    <Servlet-name>서블릿 이름</Servlet-name>
+    <url-pattern>접근 URL 패턴</url-pattern>
+</servlet-mapping>
+```
+
+```java
+@WebServlet("접근 URL 패턴")
+public class 서블릿이름 extends HttpServlet{
+
+}
+```
