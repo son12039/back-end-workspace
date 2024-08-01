@@ -15,7 +15,6 @@ public class ChatClient {
         }
 
         String name = args[0];
-
         Socket socket = new Socket("127.0.0.1", 7777);
 
         PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
@@ -24,7 +23,6 @@ public class ChatClient {
 
         System.out.println("Connected to the chat server.");
 
-        // Thread to read messages from server
         Thread readThread = new Thread(() -> {
             try {
                 String serverMessage;
@@ -37,7 +35,6 @@ public class ChatClient {
         });
         readThread.start();
 
-        // Thread to send messages to server
         String userMessage;
         while ((userMessage = keyboard.readLine()) != null) {
             out.println(name + " : " + userMessage);
@@ -46,3 +43,4 @@ public class ChatClient {
         socket.close();
     }
 }
+

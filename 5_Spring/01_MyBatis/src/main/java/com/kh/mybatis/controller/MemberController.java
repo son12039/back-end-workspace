@@ -8,11 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kh.mybatis.model.dto.SearchDTO;
 import com.kh.mybatis.model.vo.Member;
 import com.kh.mybatis.service.MemberService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class MemberController {
@@ -66,7 +70,6 @@ public class MemberController {
 		Member member = (Member)session.getAttribute("vo");
 		
 		if(vo.getId()==null) vo.setId(member.getId());
-		System.out.println(vo);
 		service.update(vo);
 		
 		if(vo.getName()==null) vo.setName(member.getName());		
@@ -74,5 +77,17 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/search")
+	public String serarch(SearchDTO dto, Model model) {
+		model.addAttribute("search", service.search(dto));
+		return "index";
+	}
+	
+	@PostMapping("/delete")
+	public String delete(@RequestParam(name="idList", required = false) List<String> idList) {	
+		if(idList!=null)service.delete(idList);
+		return "redirect:/";
+	}
+
 	
 }
