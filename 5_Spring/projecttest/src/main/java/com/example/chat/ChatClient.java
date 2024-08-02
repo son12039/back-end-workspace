@@ -36,7 +36,7 @@ public class ChatClient {
 				pw.flush();
 			}
 		} catch (Exception e) {
-			System.out.println("한명 접속 끊김11");
+			System.out.println("한명 접속 끊김");
 		}
 		
 		socket.close();

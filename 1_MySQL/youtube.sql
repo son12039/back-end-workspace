@@ -65,21 +65,16 @@ CREATE TABLE video_like(
     FOREIGN KEY (video_code) REFERENCES video(video_code)
 );
 
-INSERT INTO video(video_url, video_img, video_title, video_desc, channel_code) 
-VALUES ('http://192.168.10.51:8082/video/AKMU1.mp4',
-		'http://192.168.10.51:8082/channel/akmu.jpg',
-		'AKMU - 후라이의 꿈 LIVE CLIP (FESTIVAL ver.)',
-        'More about AKMU',
-        1);
-select * from video 
+INSERT INTO member(id,password,email,phone)
+VALUES('akmu','1234','akmu@gmail.com','010-0000-0000');
+INSERT INTO channel(channel_img,channel_name,id)
+VALUES('http://192.168.10.51:8082/channel/akmu.jpg','AKMU','akmu');
+INSERT INTO video(video_url, video_img, video_title, video_desc, channel_code)
+VALUES('http://192.168.10.51:8082/video/AKMU1.mp4','http://192.168.10.51:8082/thumbnail/akmu.webp','AKMU - 후라이의 꿈 LIVE CLIP(FESTIVAL ver.)','More about AKMU' ,'1');
+select * from video;
 JOIN channel USING (channel_code);
 desc video;
-INSERT INTO channel(channel_img, channel_name, id) 
-VALUES ('http://192.168.10.51:8082/channel/akmu.jpg', 'AKMU', 'akmu');
-
-INSERT INTO member(id, password, email, phone)
-VALUES('akmu', '1234', 'akmu@gmail.com', '010-0000-0000');
-
+delete From member;
 select * from channel;
 
 

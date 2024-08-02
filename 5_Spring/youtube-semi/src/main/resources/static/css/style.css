@@ -1,3 +1,17 @@
+.progress-bar-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 2px;
+}
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #ff0000;
+}
+
 header {
   position: fixed;
   background-color: white;
@@ -22,9 +36,11 @@ header {
   justify-content: flex-end;
   align-items: center;
 }
+
 .header-center input {
   display: none;
 }
+
 .header-center button {
   background: none;
   border: none;
@@ -40,6 +56,7 @@ header {
   border: none;
   font-size: 20px;
 }
+
 main {
   padding-top: 60px;
   display: flex;
@@ -49,6 +66,7 @@ main aside {
   position: fixed;
   width: 55px;
 }
+
 main aside a {
   height: 55px;
   display: flex;
@@ -59,9 +77,11 @@ main aside a {
 main aside a i {
   margin-bottom: 5px;
 }
+
 main aside a span {
   font-size: 0.8rem;
 }
+
 main nav {
   position: fixed;
   width: 100%;
@@ -69,20 +89,25 @@ main nav {
   display: flex;
   padding-left: 15px;
   align-items: center;
+  background: white;
 }
+
 main nav a {
   background-color: #eee;
   padding: 5px 10px;
   border-radius: 5px;
   margin: 5px;
 }
+
 main nav a.active {
   background-color: #000;
   color: #fff;
 }
+
 main section {
   padding-top: 45px;
 }
+
 /* 반응형 */
 @media screen and (min-width: 665px) {
   .header-center {
@@ -120,3 +145,52 @@ main section {
     width: 90%;
   }
 }
+/*section - video */
+.video-card {
+  width: 350px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.video-card:hover .video-main img {
+  display: none;
+}
+
+.video-main {
+  position: relative;
+}
+
+.video-main video,
+.video-main img {
+  width: 100%;
+  position: absolute;
+}
+
+.video-main img {
+  border-radius: 10px;
+}
+
+.video-main video {
+  z-index: -1;
+}
+.video-info {
+  padding-top: 200px;
+  display: flex;
+  line-height: 1.2;
+}
+.video-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.video-info h2 {
+  font-weight: bold;
+}
+
+.video-info p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
