@@ -22,14 +22,9 @@
 
         <ul>
             <li>
-            <!--
-				<span class="chat_title"></span>
-				<span class="chat_count"></span>
-				 -->
             </li>
         </ul>
     </main>
-	<!-- 채팅방 목록 -->
 
 	<!-- 채팅방 입장 -->
     <div class="chat">
@@ -40,9 +35,6 @@
 
 		        <ul class="chat_list">
 		            <li>
-		            	<!-- <div class="notification">
-		            		<span></span>
-		            	</div> -->
 		            </li>
 		        </ul>
 

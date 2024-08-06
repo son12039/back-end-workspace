@@ -27,18 +27,13 @@ public class MainController {
     public static LinkedList<ChattingRoom> chattingRoomList = new LinkedList<>();
 
 
-    //	----------------------------------------------------
     // 유틸 메서드
 
     // 방 번호로 방 찾기
     public ChattingRoom findRoom(String roomNumber) {
         ChattingRoom room = ChattingRoom.builder().roomNumber(roomNumber).build();
         int index = chattingRoomList.indexOf(room);
-
-        if(chattingRoomList.contains(room)) {
-            return chattingRoomList.get(index);
-        }
-        return null;
+        return chattingRoomList.contains(room) ? chattingRoomList.get(index) : null;
     }
 
 
@@ -46,9 +41,7 @@ public class MainController {
     public void addCookie(String cookieName, String cookieValue) {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletResponse response = attr.getResponse();
-
         Cookie cookie = new Cookie(cookieName, cookieValue);
-
         int maxage = 60 * 60 * 24 * 7;
         cookie.setMaxAge(maxage);
         response.addCookie(cookie);
@@ -109,12 +102,26 @@ public class MainController {
     }
 
     // 닉네임 생성
-    public void createNickname(String nickname) {
+    public void createNickname(String nickname) { // 방입장할때 닉넴 생성 후 쿠키에 저장
         addCookie("nickname", nickname);
     }
-
+    
+    // 닉네임 중복확인 메서드
+    public boolean isNicknameTaken(String roomNumber, String nickname) {
+        ChattingRoom room = findRoom(roomNumber);
+        if (room == null) return false;
+        
+        return room.getUsers().contains(nickname);
+    }
+    
     // 방 입장하기
     public boolean enterChattingRoom(ChattingRoom chattingRoom, String nickname) {
+    	
+    	if (isNicknameTaken(chattingRoom.getRoomNumber(), nickname)) {
+    		System.out.println(nickname+"은 중복된 닉네임!");
+            return false; // 닉네임 중복
+        }
+    	
         createNickname(nickname);
 
         if(chattingRoom == null) {
@@ -148,12 +155,11 @@ public class MainController {
     public ResponseEntity<?> chattingRoomList() {
         return new ResponseEntity<LinkedList<ChattingRoom>>(chattingRoomList, HttpStatus.OK);
     }
+    // (url: "/chattingRoomList")로 호출되어 채팅리스트를 리턴한다
 
-
-    // 방 만들기
+ // 새 채팅방 만들기 -----------------------------------------------------------
     @PostMapping("/chattingRoom")
     public ResponseEntity<?> chattingRoom(String roomName, String nickname) {
-
         // 방을 만들고 채팅방목록에 추가
         String roomNumber = UUID.randomUUID().toString();
         ChattingRoom chattingRoom = ChattingRoom.builder()
@@ -163,27 +169,25 @@ public class MainController {
                 .build();
 
         chattingRoomList.add(chattingRoom);
-
+        System.out.println("이름: " +roomName + "닉네임: " + nickname);
         // 방 입장하기
         enterChattingRoom(chattingRoom, nickname);
-
         return new ResponseEntity<>(chattingRoom, HttpStatus.OK);
     }
-
+ // 새 채팅방 만들기끝 -----------------------------------------------------------
 
     // 방 들어가기
     @GetMapping("/chattingRoom-enter")
     public ResponseEntity<?> EnterChattingRoom(String roomNumber, String nickname){
-
         // 방 번호로 방 찾기
         ChattingRoom chattingRoom = findRoom(roomNumber);
 
-        if(chattingRoom == null) {
+        if (chattingRoom == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else if (isNicknameTaken(roomNumber, nickname)) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT); // 닉네임 중복
         } else {
-            // 방 들어가기
             enterChattingRoom(chattingRoom, nickname);
-
             return new ResponseEntity<>(chattingRoom, HttpStatus.OK);
         }
     }

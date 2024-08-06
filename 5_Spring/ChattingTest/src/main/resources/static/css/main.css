@@ -18,8 +18,9 @@ html {
 }
 /* 채팅방 목록 */
 
-
 main {
+ /*background: linear-gradient(90deg, white, skyblue)*/
+ 	 background-color: rgb(188, 211, 208);
     width: 35vw;
     min-width: 300px;
     height: 90vh;

@@ -1,34 +1,33 @@
 $(document).ready(function(){
 
-
-// 방 목록 그리기
-const listHtml = function(roomList) {
-	let listHtml = "";
-
-		for(let i=roomList.length-1;i>=0;i--) {
+	
+	// 채팅방 목록 불러오기 채팅서버 입장하자마자 실행
+	const chattingRoomList = function() {
+		
+		$.ajax({
+			url: "/chattingRoomList",
+			type: "GET",
+		})
+			.then(function(result) {
+				listHtml(result)
+			})
+			.fail(function() {
+				alert("방목록 불러오기 오류");
+			})
+	}
+	
+	// 방 목록 그리기
+	const listHtml = function(roomList) {
+		let listHtml = "";
+		for (let i = roomList.length - 1; i >= 0; i--) {
 			listHtml += `
 				<li data-room_number=${roomList[i].roomNumber}>
-                    <span class="chat_title">${roomList[i].roomName }</span>
+                    <span class="chat_title">${roomList[i].roomName}</span>
                     <span class="chat_count">${roomList[i].users.length}명</span>
 	            </li>`;
 		}
 		$("main ul").html(listHtml);
-}
-
-
-// 채팅방 목록 불러오기
-const chattingRoomList = function(){
-	$.ajax({
-		url: "/chattingRoomList",
-		type: "GET",
-	})
-	.then(function(result){
-		listHtml(result)
-	})
-	.fail(function(){
-		alert("에러가 발생했습니다");
-	})
-}
+	}
 
 
 
@@ -117,9 +116,9 @@ const info = (function(){
 
 const errorMSG = function(result){
 	if(result.status == 404) {
-		alert("종료되었거나 없는 방입니다");
+   alert("없는 방이유");
 	} else {
-		alert("에러가 발생했습니다");
+		alert("방이 터진 것 같아유");
 	}
 	location.href = "/";
 }
@@ -165,7 +164,7 @@ const chatting = function(messageInfo){
 
 	const chatHtml = `
         <li>
-            <div class=${sender }>
+            <div class=${sender}>
             	<div>
 	            	<div class="nickname">${nickname }</div>
 	            	<div class="message">
@@ -282,48 +281,50 @@ $(".chat_input_area textarea").keypress(function(event) {
 })
 
 
-// 닉네임 만들고 채팅방 들어가기
+// 채팅방 입장 시 닉네임 입력, 만약 채팅방에 있는 사용자 중 동일한 닉네임이 있으면 재입력하라고 뜸 
 const enterChattingRoom = function(roomNumber) {
+    swal({
+        text: "사용하실 닉네임을 입력해주세요",
+        content: "input",
+        buttons: ["취소", "확인"],
+        closeOnClickOutside: false
+    })
+    .then(function(nickname) {
+        if (nickname) {
+            const data = {
+                roomNumber: roomNumber,
+                nickname: nickname
+            };
 
-	swal({
-		text: "사용하실 닉네임을 입력해주세요",
-		content: "input",
-		buttons: ["취소", "확인"],
-		closeOnClickOutside : false
-	})
-	.then(function(nickname){
-		if(nickname) {
+            $.ajax({
+                url: "/chattingRoom-enter",
+                type: "GET",
+                data: data,
+                success: function(room) { // 성공 시 호출됨
+                    initRoom(room, nickname);
 
-			const data = {
-				roomNumber : roomNumber,
-				nickname : nickname
-			}
-
-			$.ajax({
-				url: "/chattingRoom-enter",
-				type: "GET",
-				data: data,
-			})
-			.then(function(room){
-				initRoom(room, nickname);
-
-				// 채팅방 참가 메세지
-				room.message = nickname + "님이 참가하셨습니다";
-				stomp.send(
-					"/socket/notification/" + roomNumber, {},
-					JSON.stringify(room));
-
-			})
-			.fail(function(result){
-				errorMSG(result);
-			})
-		}
-	})
-}
+                    // 채팅방 참가 메세지
+                    room.message = nickname + "님이 참가하셨습니다";
+                    stomp.send(
+                        "/socket/notification/" + roomNumber, {},
+                        JSON.stringify(room));
+                },
+                error: function(xhr) {
+                    if (xhr.status === 409) {
+                        swal("닉네임 중복", "이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.", "error")
+                            .then(() => enterChattingRoom(roomNumber)); // 재시도
+                    } else {
+                        errorMSG(xhr);
+                    }
+                }
+            });
+        }
+    });
+};
 
 
 
-// 새 채팅방 만들기
+// 새 채팅방 만들기 -----------------------------------------------------------
 const createRoom = function(roomName) {
 	swal({
 		text: "사용하실 닉네임을 입력해주세요",
@@ -353,7 +354,7 @@ const createRoom = function(roomName) {
 		}
 	})
 }
-
+// 새 채팅방 만들기 -----------------------------------------------------------
 
 
 

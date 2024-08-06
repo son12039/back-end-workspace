@@ -11,3 +11,11 @@ public class ProjectApplication {
 	}
 
 }
+/* 
+ * 전부 자바 조건문 반복문
+ * 객체 다이어그램읽기
+ * vo도 알기
+ * 오버로딩
+ * jdbc select
+ * sevlet jsp
+ * */

@@ -70,9 +70,11 @@ public class MemberController {
 		Member member = (Member)session.getAttribute("vo");
 		
 		if(vo.getId()==null) vo.setId(member.getId());
+		
 		service.update(vo);
 		
-		if(vo.getName()==null) vo.setName(member.getName());		
+		if(vo.getName()==null) vo.setName(member.getName());
+		
 		session.setAttribute("vo", vo);
 		return "redirect:/";
 	}

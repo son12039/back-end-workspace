@@ -10,7 +10,7 @@ public class Message {
     private String nickname;
     private Date date;
 
-    Message(){
+    Message(){ // 쓸 때마다 현재시각으로 변경
         date = new Date();
     }
 }
