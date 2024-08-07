@@ -25,7 +25,7 @@ public class WordServlet extends HttpServlet {
 		// 응답!
 		PrintWriter out = response.getWriter();
 		out.println("<html><body>");
-		out.println("<h1>Client Send Data : " + keyword + " </h1>");
+		out.println("<h1>Client Send Data : " + keyword + "</h1>");
 		out.println("</body></html>");
 		
 		out.close();

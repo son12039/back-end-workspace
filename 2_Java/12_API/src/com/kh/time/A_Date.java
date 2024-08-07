@@ -29,7 +29,7 @@ public class A_Date {
 		System.out.println("getSeconds : " + today.getSeconds() + "초");
 		
 		// SimpleDateFormat : 날짜 데이터를 원하는 형태로 출력할 수 있도록 (H: 0~23, h : 1~12)
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 (E) a HH시 mm분 ss초");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 (E) a HH시 mm분 SS초");
 		// 2024년 07월 11일 (목) 오후 12시 14분 12초
 		String formatDate = sdf.format(today);
 		System.out.println(formatDate);	
@@ -79,8 +79,8 @@ public class A_Date {
 	
 	public static void main(String[] args) {
 		A_Date a =new A_Date();
-//		a.method1();
-		a.method2();
+		a.method1();
+//		a.method2();
 	}
 
 }

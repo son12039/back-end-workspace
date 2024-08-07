@@ -1,8 +1,9 @@
 # Web Server와 WAS
 
-## 웹 서버(Wdb Server)
+## 웹 서버(Web Server)
 
-- 웹에서 서버 기능을 수행하는 프로그램으로 HTML 문서나 JPG, PNG 같은 이미지를 HTTP 프로토콜을 통해 웹 브라우저에 제공하는 서버
+- 웹에서 서버 기능을 수행하는 프로그램으로 HTML 문서나 JPG, PNG 같은 이미지를
+  HTTP 프로토콜을 통해 웹 브라우저에 제공하는 서버
 - 서버 내부의 이미 만들어져 있는 정적인 요소들을 화면에 제공하는 역할
 - Apache : Apache Software Foundation에서 만든 웹 서버로 HTTP 통신에 대한 여러 라이브러리 제공
 
@@ -28,28 +29,27 @@
 ## 배포 서술자(Deployment Descriptor)
 
 - 애플리케이션에 대한 전체 설정 정보를 가지고 있는 파일
-- 배포 서술자의 정보를 가지고 컨테이너가 서블릿 구동한다
+- 배포 서술자의 정보를 가지고 컨테이너가 서블릿 구동한다.
 - 웹 애플리케이션 폴더의 WEB-INF 폴더에 web.xml 파일이 배포 서술자이다.
 
 ## 서블릿 매핑
 
-- 클라이언트의 요청을 서블릿에게 전달하기 위해서는 서블릿을 등록하고 매핑해야 한다. 
+- 클라이언트의 요청을 서블릿에게 전달하기 위해서는 서블릿을 등록하고 매핑해야 한다.
 - 서블릿을 등록하고 매핑하는 방법은 web.xml과 @annotation을 이용하는 방법이 있다.
 
 ```xml
-<Servlet>
-    <Servlet-name>서블릿 이름</Servlet-name>
-    <Servlet-class>서블릿 클래스</Servlet-class>
-</Servlet>
-<servlet-mapping> 
-    <Servlet-name>서블릿 이름</Servlet-name>
+<servlet>
+    <servlet-name>서블릿 이름</servlet-name>
+    <servlet-class>서블릿 클래스</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>서블릿 이름</servlet-name>
     <url-pattern>접근 URL 패턴</url-pattern>
 </servlet-mapping>
 ```
 
 ```java
 @WebServlet("접근 URL 패턴")
-public class 서블릿이름 extends HttpServlet{
-
+public class 서블릿이름 extends HttpServlet {
 }
 ```

@@ -17,8 +17,11 @@
 		<label><input type="checkbox" name="hobby" value="exercise">운동</label>
 		<label><input type="checkbox" name="hobby" value="song">노래</label>
 		
-		
 		<p><input type="submit" value="데이터 전송"></p>
 	</form>
 </body>
 </html>
+
+
+
+

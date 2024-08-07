@@ -1,6 +1,5 @@
 package com.kh.example.partice3.controller;
 
-import com.kh.example.practice3.model.Employee;
 import com.kh.example.practice3.model.Employeeteacher;
 
 public class EmployeeControllerteacher {

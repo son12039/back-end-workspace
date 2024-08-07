@@ -2,12 +2,12 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
   <servlet>
     <description></description>
-    <display-name>GenericServletTest1</display-name>
-    <servlet-name>GenericServletTest1</servlet-name>
-    <servlet-class>servlet.generic.GenericServletTest1</servlet-class>
+    <display-name>GenericServletTest</display-name>
+    <servlet-name>GenericServletTest</servlet-name>
+    <servlet-class>servlet.generic.GenericServletTest</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GenericServletTest1</servlet-name>
+    <servlet-name>GenericServletTest</servlet-name>
     <url-pattern>/generic</url-pattern>
   </servlet-mapping>
   <display-name>01_GenericServlet</display-name>
@@ -20,9 +20,15 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>GenericServletTest</servlet-name>
-    <servlet-class>servlet.generic.GenericServletTest</servlet-class>
+    <description></description>
+    <display-name>FormServlet</display-name>
+    <servlet-name>FormServlet</servlet-name>
+    <servlet-class>servlet.http.FormServlet</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>FormServlet</servlet-name>
+    <url-pattern>/FormServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>WordServlet</display-name>
@@ -35,12 +41,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>FormServlet</display-name>
-    <servlet-name>FormServlet</servlet-name>
+    <display-name>FormServlet2</display-name>
+    <servlet-name>FormServlet2</servlet-name>
     <servlet-class>servlet.http.FormServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FormServlet</servlet-name>
-    <url-pattern>/FormServlet</url-pattern>
+    <servlet-name>FormServlet2</servlet-name>
+    <url-pattern>/FormServlet2</url-pattern>
   </servlet-mapping>
 </web-app>

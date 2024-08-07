@@ -9,9 +9,15 @@
 <body>
 	<%
 		request.setAttribute("result", "request");
-		session.setAttribute("result", "session");
-		request.getRequestDispatcher("el1_view.jsp").
-		forward(request, response);
+		session.setAttribute("result2", "session");
+		request.getRequestDispatcher("el1_view.jsp").forward(request, response);
 	%>
 </body>
 </html>
+
+
+
+
+
+
+

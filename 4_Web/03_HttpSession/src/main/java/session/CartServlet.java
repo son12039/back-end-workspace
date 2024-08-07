@@ -18,14 +18,21 @@ public class CartServlet extends HttpServlet {
 		// session
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("info");
-		System.out.println(member);
+		
 		// request
 		String product = (String) request.getAttribute("product");
+		
+		System.out.println(member);
 		System.out.println(product);
 		
-		// 로그아웃! 세션정보숨통끊기
+		// 로그아웃! 즉 세션 정보 죽여버리기!
 		session.invalidate();
-		response.sendRedirect("index.jsp");// 로그인페이지로
+		response.sendRedirect("index.jsp");
 	}
 
 }
+
+
+
+
+

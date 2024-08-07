@@ -8,16 +8,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%Member mem = (Member) request.getAttribute("mem");
-	if(mem!=null) { %>
-		<p>아이디 : <%=mem.getId() %></p>
-		<p>비밀번호 : <%=mem.getPassword() %></p>
-		<p>이름 : <%=mem.getName() %></p>
-		
-	<%} else {%> 
-		<h1>회원 정보 없음</h1>
-	<%} %>
-
-		 
+	<% Member member = (Member) request.getAttribute("info"); 
+	if(member!=null) {
+	%>
+	<h1>회원 정보 결과</h1>
+	<ul>
+		<li>아이디 : <%=member.getId() %></li>
+		<li>비밀번호 : <%=member.getPassword() %></li>
+		<li>이름 : <%=member.getName() %></li>
+	</ul>
+	<% } else { %>
+	<h1>회원 정보가 없습니다</h1>
+	<% } %>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,21 +15,33 @@ import com.kh.model.vo.Member;
 @WebServlet("/view")
 public class ViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
-	
+       
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		MemberDAO m = new MemberDAO();
-		ArrayList<Member> mlist = new ArrayList();
+		// 1. DAO - showAllMember
+		MemberDAO dao = new MemberDAO();
+		ArrayList<Member> list = null;
 		try {
-			 mlist = m.printAll();			
+			list = dao.showAllMember();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("mlist", mlist);
+		
+		// 2. 바인딩 : list 전체
+		request.setAttribute("list", list);
+		
+		// 3. 네비게이션  : view.jsp
 		request.getRequestDispatcher("view.jsp").forward(request, response);
-				
+		
 	}
 
+
 }
+
+
+
+
+
+
+
+
+

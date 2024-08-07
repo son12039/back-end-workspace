@@ -1,6 +1,5 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.kh.model.dao.MemberDAO"%>
-<%@page import="com.kh.model.vo.Member"%>
+<%@page import="model.vo.Member"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,21 +9,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<% ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");%>
+	<h1>전체 회원 목록</h1>
+	<a href="/">메인 페이지로 이동</a>
+	<% List<Member> list = (List<Member>) request.getAttribute("list"); %>
 	<table border="1">
 		<tr>
-		<% for(Member m : list) { %>  
-			<th><%=m.getId() %> </th>
-			<th><%=m.getPassword() %> </th>
-			<th><%=m.getName() %> </th>	
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>이름</th>
+		</tr>
+		<% for(Member m : list) { %>
+			<tr>
+				<td><%=m.getId() %></td>
+				<td><%=m.getPassword() %></td>
+				<td><%=m.getName() %></td>
 			</tr>
-			
-			 <% } %>
+		<% } %>
 	</table>
-	
-	
-	<a href="/">돌아가기</a>
-	
 </body>
 </html>
+
+
+
+
+

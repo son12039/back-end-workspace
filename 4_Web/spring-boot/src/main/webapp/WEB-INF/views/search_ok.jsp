@@ -10,10 +10,10 @@
 <body>
 	<h1>회원 검색 결과</h1>
 	<ul>
-		<li>검색한 아이디 :  ${m.id}</li>
-		<li>검색한 비밀번호 :  ${m.password}</li>
-		<li>검색한 이름 :  ${m.name}</li>
+		<li>아이디 : ${member.id}</li>
+		<li>비밀번호 : ${member.password}</li>
+		<li>이름 : ${member.name}</li>
 	</ul>
-	<a href="/">돌아가기</a>
+	<a href="/">메인 페이지로 이동</a>
 </body>
 </html>

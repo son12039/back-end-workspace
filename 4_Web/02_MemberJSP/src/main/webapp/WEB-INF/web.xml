@@ -31,32 +31,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ViewServlet1</display-name>
-    <servlet-name>ViewServlet1</servlet-name>
-    <servlet-class>com.kh.controller.ViewServlet1</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewServlet1</servlet-name>
-    <url-pattern>/ViewServlet1</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ViewServlet122</display-name>
-    <servlet-name>ViewServlet122</servlet-name>
-    <servlet-class>com.kh.controller.ViewServlet122</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewServlet122</servlet-name>
-    <url-pattern>/ViewServlet122</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>SearchServlet</display-name>
     <servlet-name>SearchServlet</servlet-name>
     <servlet-class>com.kh.controller.SearchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/SearchServlet</url-pattern>
   </servlet-mapping>
 </web-app>

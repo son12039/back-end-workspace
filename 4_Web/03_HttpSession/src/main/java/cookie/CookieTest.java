@@ -20,10 +20,12 @@ public class CookieTest extends HttpServlet {
 		
 		// 2. 쿠키의 유효시간 지정
 		c1.setMaxAge(20); // 20초
-		c2.setMaxAge(60*60*24);
+		c2.setMaxAge(60*60*24); // 하루
+		
 		// 3. 쿠키 브라우저로 전송
 		response.addCookie(c1);
 		response.addCookie(c2);
+		
 	}
 
 }

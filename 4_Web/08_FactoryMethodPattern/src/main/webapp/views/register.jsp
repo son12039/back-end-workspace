@@ -8,12 +8,17 @@
 </head>
 <body>
 	<h1>회원가입</h1>
-    <form action="/register.do" method="post">
-    <input type="hidden" value="register"/>
-      <label>아이디 :  <input type="text" name="id"   /></label> <br />
-      <label>비밀번호 : <input type="password" name="pwd" /></label> <br />
-      <label>이름 : <input type="text" name="name" /></label> <br />
-      <input type="submit" value="회원가입" />
-    </form>
+	<form action="/register.do" method="post">
+		아이디 : <input type="text" name="id"><br>
+		비밀번호 : <input type="password" name="password"><br>
+		이름 : <input type="text" name="name"><br>
+		<input type="submit" value="회원가입">
+	</form>
 </body>
 </html>
+
+
+
+
+
+

@@ -14,15 +14,14 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 폼값받기
+		// 1. 폼 값 받는다.
 		String id = request.getParameter("id");
-		String pwd = request.getParameter("password");
+		String password = request.getParameter("password");
 		
-		// DAO 생략.. 로그인 성공했다 가정
+		// DAO 생략.. 로그인 성공했다 가정!
 		
-		Member member = new Member(id, pwd, "테스트");
+		Member member = new Member(id, password, "테스트");
 		
 		// HttpSession
 		// 1) 세션을 하나 받아온다
@@ -33,7 +32,12 @@ public class LoginServlet extends HttpServlet {
 		
 		// 네비게이션
 		response.sendRedirect("product");
-		
 	}
 
 }
+
+
+
+
+
+

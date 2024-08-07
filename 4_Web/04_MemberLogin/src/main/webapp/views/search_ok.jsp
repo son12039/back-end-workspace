@@ -1,4 +1,4 @@
-<%@page import="com.kh.model.vo.Member"%>
+<%@page import="model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,15 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% 	Member mb = (Member) request.getAttribute("user");
-	%>
+	<h1>회원 검색 결과</h1>
+	<% Member member = (Member) request.getAttribute("member"); %>
 	<ul>
-		<li>검색한 아이디 :  <%=mb.getId() %></li>
-		<li>검색한 비밀번호 :  <%=mb.getPassword() %></li>
-		<li>검색한 이름 :  <%=mb.getName() %></li>
-
-	
+		<li>아이디 : <%=member.getId() %></li>
+		<li>비밀번호 : <%=member.getPassword() %></li>
+		<li>이름 : <%=member.getName() %></li>
 	</ul>
-	<a href="/">돌아가기</a>
+	<a href="/">메인 페이지로 이동</a>
 </body>
 </html>

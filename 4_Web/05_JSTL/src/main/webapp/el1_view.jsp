@@ -21,5 +21,12 @@
 	 <p>session : ${sessionScope.result}</p>
 	 <p>${result}</p>
 	 <p>${result2}</p>
+
 </body>
 </html>
+
+
+
+
+
+

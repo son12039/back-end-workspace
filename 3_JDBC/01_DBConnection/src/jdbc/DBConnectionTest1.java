@@ -27,7 +27,7 @@ public class DBConnectionTest1{
 			System.out.println("2. 데이터베이스와 연결...!");
 			
 			// 3. Statement 객체 생성 - 쿼리 : SELECT
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM employee WHERE emp_id = 200");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM employee WHERE emp_id = 210");
 			
 			// 4. 쿼리문 실행
 			ResultSet rs =ps.executeQuery();
@@ -42,7 +42,7 @@ public class DBConnectionTest1{
 				System.out.printf("%s %s %d %.1f %s %s\n",empId,empName,salary,bonus,hireDate,entYn);
 			}
 			
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

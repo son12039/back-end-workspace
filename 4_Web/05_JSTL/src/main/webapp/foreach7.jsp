@@ -1,6 +1,7 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +10,17 @@
 </head>
 <body>
 	<%
-		String[] arr={"두루치기", "삼계탕", "김치찌개", "삼겹살", "순두부찌개"};
-	request.setAttribute("arr", arr);
-	for(String m : arr) {
-		System.out.println(m);
-	}
+		String[] arr = {"두루치기", "삼계탕", "김치찌개", "삼겹살", "순두부찌개"};
 	%>
-	<!-- Member -->
-	<c:forEach items="${arr}" var="menu" varStatus="status">
+	<!-- 여기 부분에 대한 설명은 MemberJSTL -->
+	<c:forEach items="${arr}" var="menu">
 		- ${menu}<br>
 	</c:forEach>
 </body>
 </html>
+
+
+
+
+
+
