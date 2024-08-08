@@ -65,7 +65,7 @@
    		</div>
     </div>
     <!-- 채팅방 입장 -->
-
+	<div id="test">테스트</div>
     <!-- sock js -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
 	<!-- STOMP -->

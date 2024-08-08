@@ -269,11 +269,11 @@ $(".chat_button_area button").click(function() {
 	$(".chat_input_area textarea").focus();
 })
 
-
+// 채팅방 안에서 채팅발송 로직
 $(".chat_input_area textarea").keypress(function(event) {
-	if (event.keyCode == 13) {
-		if (!event.shiftKey) {
-			event.preventDefault();
+	if (event.keyCode == 13) { // enter 눌렀을 때 채팅방에서 줄바꿈대신 메세지발송
+		if (!event.shiftKey) { //shift안누르고있을때
+			event.preventDefault(); 
 
 			sendMessage();
 		}
@@ -281,7 +281,7 @@ $(".chat_input_area textarea").keypress(function(event) {
 })
 
 
-// 채팅방 입장 시 닉네임 입력, 만약 채팅방에 있는 사용자 중 동일한 닉네임이 있으면 재입력하라고 뜸 
+// 채팅방 입장 시 닉네임 입력받음 만약 채팅방에 있는 사용자 중 동일한 닉네임이 있으면 재입력하라고 뜸 
 const enterChattingRoom = function(roomNumber) {
     swal({
         text: "사용하실 닉네임을 입력해주세요",
@@ -354,9 +354,9 @@ const createRoom = function(roomName) {
 		}
 	})
 }
+
+
 // 새 채팅방 만들기 -----------------------------------------------------------
-
-
 
 $(".new_chat").click(function(){
 	swal({

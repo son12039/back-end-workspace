@@ -25,8 +25,10 @@ public class MainController {
 
     // 채팅방 목록
     public static LinkedList<ChattingRoom> chattingRoomList = new LinkedList<>();
-
-
+    
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     // 유틸 메서드
 
     // 방 번호로 방 찾기
@@ -144,7 +146,7 @@ public class MainController {
     // 메인화면
     @GetMapping("/")
     public String main(Model model) {
-        model.addAttribute("message", "Welcome to Chatting Test Application");
+        model.addAttribute("message", "테스트!");
         return "main";  // "main"은 "WEB-INF/jsp/main.jsp"를 가리킵니다.
     }
 
@@ -158,11 +160,24 @@ public class MainController {
     // (url: "/chattingRoomList")로 호출되어 채팅리스트를 리턴한다
 
  // 새 채팅방 만들기 -----------------------------------------------------------
+    public void basicRoom(List<ChattingRoom> basiclist) {
+    	ChattingRoom chattingRoom = null;
+    	for(ChattingRoom basic : basiclist) {
+    		 chattingRoom = ChattingRoom.builder()
+    	                .roomNumber(basic.getRoomNumber())
+    	                .users(new LinkedList<>())
+    	                .roomName(basic.getRoomName())
+    	                .build();
+    		 chattingRoomList.add(chattingRoom);
+    	}
+    	 
+    }
     @PostMapping("/chattingRoom")
     public ResponseEntity<?> chattingRoom(String roomName, String nickname) {
         // 방을 만들고 채팅방목록에 추가
+    	ChattingRoom chattingRoom = null;
         String roomNumber = UUID.randomUUID().toString();
-        ChattingRoom chattingRoom = ChattingRoom.builder()
+         chattingRoom = ChattingRoom.builder()
                 .roomNumber(roomNumber)
                 .users(new LinkedList<>())
                 .roomName(roomName)
