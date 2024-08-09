@@ -17,6 +17,9 @@ public class MemberService {
 	public Member idCheck(String id) {
 		return mapper.idCheck(id);
 	}
+	public void register(Member member) {
+		 mapper.register(member);
+	}
 }
 
 

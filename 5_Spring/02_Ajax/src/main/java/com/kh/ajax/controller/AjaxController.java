@@ -1,5 +1,8 @@
 package com.kh.ajax.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,4 +41,15 @@ public class AjaxController {
 		return ms.idCheck(id);
 	}
 	
+	@ResponseBody
+	@PostMapping("/serial")
+	public boolean register(String id,String password, String name) {
+		if (ms.idCheck(id) == null) {
+			Member mem = new Member(id,password,name);
+			ms.register(mem);
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

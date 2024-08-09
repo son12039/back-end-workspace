@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.semi.youtube.service.VideoService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class PageController {
@@ -25,6 +27,11 @@ public class PageController {
 		model.addAttribute("video", video.detail(videoCode));
 		model.addAttribute("list", video.allVideo());
 		return "detail";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
 	}
 	
 }
