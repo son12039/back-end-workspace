@@ -8,7 +8,7 @@
         <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ChattingTest</groupId>
+    <groupId>com.damoim</groupId>
     <artifactId>ChattingTest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>

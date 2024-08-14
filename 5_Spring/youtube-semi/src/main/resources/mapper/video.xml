@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.VideoMapper">
 
-	<resultMap type="Video" id="videoMap">
+	<resultMap id="videoMap" type="Video">
 		<id column="video_code" property="videoCode"/>
 		<result column="video_url" property="videoUrl"/>
 		<result column="video_img" property="videoImg"/>
@@ -21,9 +21,14 @@
 		SELECT * FROM video 
 		JOIN channel USING (channel_code)
 	</select>
+	
 	<select id="detail" parameterType="Integer" resultMap="videoMap">
 		SELECT * FROM video 
 		JOIN channel USING (channel_code)
 		WHERE video_code = #{videoCode}
 	</select>
+
 </mapper>
+
+
+
