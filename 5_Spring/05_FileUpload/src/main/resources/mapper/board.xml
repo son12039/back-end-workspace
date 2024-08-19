@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BoardMapper"> 
+
+	<insert id="addBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
+		INSERT INTO board(title,content,url) VALUES(#{title},#{content},#{url})
+	</insert>
+	
+	<select id="allview" parameterType="Paging" resultType="Board">
+		select * from board
+		LIMIT #{offset},#{limit}
+	</select>
+	
+	<select id="select" parameterType="Integer" resultType="Board">
+		select * from board
+		where no=${no}
+	</select>
+	
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM board WHERE no=#{no}
+	</delete>
+	
+	<update id="update" parameterType="Board">
+		update board
+		set title = #{title},content = #{content},url = #{url}
+		where no=#{no}
+	</update>
+</mapper>
