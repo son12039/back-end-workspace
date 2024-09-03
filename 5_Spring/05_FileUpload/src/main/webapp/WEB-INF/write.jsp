@@ -5,15 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-    crossorigin="anonymous" />
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous" />
 </head>
 <body>
-
 	<div class="container">
 		<h1>게시물 등록</h1>
 		<form action="/write" method="post" enctype="multipart/form-data">
@@ -32,6 +30,5 @@
 			<button type="submit" class="btn btn-outline-warning">등록</button>
 		</form>
 	</div>
-
 </body>
 </html>

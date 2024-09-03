@@ -61,7 +61,7 @@ INSERT INTO employee (emp_id, emp_name, emp_no, email, phone, dept_code, job_cod
 INSERT INTO employee (emp_id, emp_name, emp_no, email, phone, dept_code, job_code, salary, bonus, manager_id, hire_date, ent_date, ent_yn) VALUES ('220','이중석','770823-1113111','lee_js@kh.or.kr',null,'D2','J4',2490000,null,null,'2014-09-18',null,'N');
 INSERT INTO employee (emp_id, emp_name, emp_no, email, phone, dept_code, job_code, salary, bonus, manager_id, hire_date, ent_date, ent_yn) VALUES ('221','유하진','800808-1123341','yoo_hj@kh.or.kr',null,'D2','J4',2480000,null,null,'1994-01-20',null,'N');
 INSERT INTO employee (emp_id, emp_name, emp_no, email, phone, dept_code, job_code, salary, bonus, manager_id, hire_date, ent_date, ent_yn) VALUES ('222','이태림','760918-2854697','lee_tr@kh.or.kr','01033000002','D8','J6',2436240,0.35,'100','1997-09-12','2017-09-12','Y');
-
+select * from employee;
 CREATE TABLE job(
 	job_code CHAR(2) PRIMARY KEY,
     job_name VARCHAR(35)

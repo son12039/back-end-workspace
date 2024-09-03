@@ -22,7 +22,6 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/check")
 	public boolean check(String id) {
-		System.out.println(id);
 		return member.check(id);
 	}
 	
@@ -32,6 +31,7 @@ public class MemberController {
 		member.signup(vo);
 		return "redirect:/";
 	}
+	
 	
 }
 

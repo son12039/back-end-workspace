@@ -10,34 +10,43 @@ import com.kh.upload.model.vo.Paging;
 
 import mapper.BoardMapper;
 
-
-
 @Service
 public class BoardService {
-	
+
 	@Autowired
 	private BoardMapper mapper;
-	
-	public void addBoard(Board board) {
-		 mapper.addBoard(board);
+
+	public void insert(Board vo) {
+		mapper.insert(vo);
 	}
-	public List<Board> allview(Paging paging) {
-		
+
+	public List<Board> selectAll(Paging paging) {
+
 		/*
-		 * limit가 10인 경우
-		 * page = n -> offset = (n-1)10;
-		 * */
-		paging.setOffset(paging.getLimit()*(paging.getPage()-1));
-		
-		 return mapper.allview(paging);
+		 * limit가 10인 경우 page = 1 -> offset = 0 page = 2 -> offset = 10 page = 3 ->
+		 * offset = 20 ...
+		 * 
+		 * offset = limit * (page - 1)
+		 */
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+
+		return mapper.selectAll(paging);
 	}
-	public void delete(int no) {
-		 mapper.delete(no);
-	}
-	public void update(Board vo) {
-		 mapper.update(vo);
-	}
+
 	public Board select(int no) {
-		 return mapper.select(no);
+		return mapper.select(no);
 	}
+
+	public int total() {
+		return mapper.total();
+	}
+
+	public void update(Board vo) {
+		mapper.update(vo);
+	}
+
+	public void delete(int no) {
+		mapper.delete(no);
+	}
+
 }
