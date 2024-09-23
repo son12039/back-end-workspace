@@ -1,60 +1,110 @@
-let dragging = false;
-let shiftX, shiftY, startPageX, startPageY;
+$(function() {
+	const $canvas = $('#can');
+	const canvas = $canvas.get(0);
+	const ctx = canvas.getContext('2d');
 
-let ball = $("#ball")[0];
-ball.onmousedown = function(event) {
-	event.preventDefault(); // 기본 드래그 동작 방지
-	dragging = true;
+	let isDrawing = false;
+	let lastX = 0;
+	let lastY = 0;
 
-	// 드래그 시작 시 오프셋 및 시작 위치 설정
-	shiftX = event.clientX - ball.getBoundingClientRect().left;
-	shiftY = event.clientY - ball.getBoundingClientRect().top;
-	startPageX = event.pageX;
-	startPageY = event.pageY;
 
-	// 마우스 이동 및 스크롤 이벤트 리스너 등록
-	document.addEventListener('mousemove', onMouseMove);
-	document.addEventListener('mouseup', onMouseUp);
-};
+	let trails = [];
 
-function moveAt(clientX, clientY) {
-	// 현재 요소의 크기 가져오기
-	const ballRect = ball.getBoundingClientRect();
 
-	// 화면 크기 및 뷰포트 위치 가져오기
-	const viewportWidth = window.innerWidth;
-	const viewportHeight = document.body.offsetHeight;
+	function resizeCanvas() {
+		canvas.width = $(window).width();
+		canvas.height = $(window).height();
+	}
+	$(window).on('resize', resizeCanvas);
+	resizeCanvas();
 
-	// 새로운 위치 계산 (뷰포트 기준)
-	let newLeft = clientX - shiftX;
-	let newTop = clientY - shiftY + window.scrollY;
 
-	// 경계 검사 및 조정
-	if (newLeft < 0) newLeft = 0;
-	if (newTop < 0) newTop = 0;
-	if (newLeft + ballRect.width > viewportWidth) newLeft = viewportWidth - ballRect.width;
-	if (newTop + ballRect.height > viewportHeight) newTop = viewportHeight - ballRect.height;
+	function startDrawing(e) {
+		isDrawing = true;
+		[lastX, lastY] = [e.clientX, e.clientY];
+	}
 
-	// 요소의 위치 설정
-	ball.style.left = newLeft + 'px';
-	ball.style.top = newTop + 'px';
-}
 
-function onMouseMove(event) {
-	if (!dragging) return;
+	function stopDrawing() {
+		isDrawing = false;
+	}
+	let col = 0;
+	let bol = true;
+	let r = 0; // 빨강색
+	let g = 0; // 초록색
+	let b = 0; // 파랑색
+	function draw(e) {
+		if (bol) {
+			col+=3;
+		} else {
+			col-=3;
+		}
+		if (col >= 255) bol = false;
+		if (col <= 1) bol = true;
+		 r = 255; // 빨강색
+		 g = col; // 초록색
+		 b = 255 - col; // 파랑색
+		if (!isDrawing) return;
 
-	// 현재 페이지 위치를 기준으로 이동
-	moveAt(event.clientX, event.clientY);
-}
+		const now = Date.now();
 
-function onMouseUp() {
-	// 드래그 종료 시 이벤트 리스너 제거
-	dragging = false;
-	document.removeEventListener('mousemove', onMouseMove);
-	document.removeEventListener('mouseup', onMouseUp);
-}
 
-// 드래그 시작 시 기본 동작 방지
-ball.ondragstart = function() {
-	return false;
-};
+		trails.push({
+			x1: lastX,
+			y1: lastY,
+			x2: e.clientX,
+			y2: e.clientY,
+			time: now,
+			alpha: 1
+		});
+
+
+		ctx.beginPath();
+		ctx.moveTo(lastX, lastY);
+		ctx.lineTo(e.clientX, e.clientY);
+		ctx.strokeStyle = `rgba(0, 0, 0, 1)`;
+		ctx.lineWidth = 2;
+		ctx.stroke();
+
+		[lastX, lastY] = [e.clientX, e.clientY];
+	}
+
+
+	function clearTrails() {
+		const now = Date.now();
+
+
+		trails.forEach(trail => {
+			const age = now - trail.time;
+
+			trail.alpha = Math.max(1 - age / 500, 0);
+		});
+
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+		trails.forEach(trail => {
+			ctx.beginPath();
+			ctx.moveTo(trail.x1, trail.y1);
+			ctx.lineTo(trail.x2, trail.y2);
+			ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${trail.alpha})`;
+			ctx.lineWidth = 2;
+			ctx.stroke();
+		});
+
+
+		trails = trails.filter(trail => trail.alpha > 0);
+	}
+
+	function animate() {
+		clearTrails();
+		requestAnimationFrame(animate);
+	}
+
+	$canvas.on('mousemove', draw);
+	$canvas.on('mouseleave', stopDrawing);
+	$canvas.on('mouseenter', startDrawing);
+
+	animate();
+});

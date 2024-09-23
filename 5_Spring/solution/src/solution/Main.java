@@ -6,19 +6,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		Main m = new Main();
-//		m.solution();
-		m.gcd(8, 6);
+		m.s();
+
 	}
 
 	public void solution() {
 		int[] list = {2,6,8,14};
-		int result = 1;
-		int divides = 1;
-		for(int i :list) {
-			int a = i/divides;
-			result*=a;
-			divides*=a;
-			System.out.println(result);
+		
+	}
+	public void s() {
+		for(int i =1; i<=10; i++) {
+			i+=3;
+			System.out.println(i);
+			 
 		}
 	}
 	public int gcd(int a, int b) {
@@ -26,7 +26,6 @@ public class Main {
             int temp = b;
             b = a % b;
             a = temp;
-            System.out.println(a+" : "+b);
         }
         return a;
     }
