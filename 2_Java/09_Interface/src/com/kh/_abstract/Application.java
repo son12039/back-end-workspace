@@ -42,14 +42,14 @@ public class Application {
 		f.rule();
 		
 		// 피자 관련된 출력 과정
-		 Pizza[] pizza = {
-				new BulgogiPizza(30000, "피자헛"),
-				new PotatoPizza(20000, "도미노피자"),
-				new PineApplePizza(10000, "잭슨피자")};
-		
-		for(Pizza p : pizza) {
-			p.makePizza();
-		} 
+//		 Pizza[] pizza = {
+//				new BulgogiPizza(30000, "피자헛"),
+//				new PotatoPizza(20000, "도미노피자"),
+//				new PineApplePizza(10000, "잭슨피자")};
+//		
+//		for(Pizza p : pizza) {
+//			p.makePizza();
+//		} 
 		
 
 		

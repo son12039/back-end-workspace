@@ -1,2 +1,4 @@
+GitRepositoriesView.GitDirectories=D\:\\Whatever\\.git;D\:\\back-end-workspace\\.git;D\:\\chat-workspace\\.git;D\:\\TeamRecoderSemiProject\\.git;
+GitRepositoriesView.GitDirectories.relative=.git;D\:\\back-end-workspace\\.git;D\:\\chat-workspace\\.git;D\:\\TeamRecoderSemiProject\\.git;
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-D:\back-end-workspace\exam-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2288341920.index
-\movie-test\src\main\java
